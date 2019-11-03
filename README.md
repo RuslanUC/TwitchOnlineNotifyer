@@ -13,7 +13,7 @@ pyinstaller main.py --icon=icon.ico --hidden-import=plyer --hidden-import=plyer.
 
 curl -H 'Accept: application/vnd.twitchtv.v5+json' \
 -H 'Client-ID: ВАШ CLIENT-ID' \
--X GET https://api.twitch.tv/kraken/users?login=ЛОГИН СТРИМЕРА
+-X GET https://api.twitch.tv/kraken/users?login=ЛОГИН_СТРИМЕРА
 
 
 Этот код можно выполнить на сайте https://onlinecurl.com/, а полученный JSON можно привести в читабельный вид с помощью http://chris.photobooks.com/json/default.htm
