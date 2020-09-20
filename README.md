@@ -1,5 +1,4 @@
-Если вы компилируете проэкт из исходника используя pyinstaller, команда для компиляции должна выглядеть так:
-
+Если вы компилируете проект из исходника используя pyinstaller, команда для компиляции должна выглядеть так:
 pyinstaller main.py --icon=icon.ico --hidden-import=plyer --hidden-import=plyer.platforms --hidden-import=plyer.platforms.win --hidden-import=plyer.platforms.win.notification
 
 После чего в папку с готовым exe файлом нужно поместить файл icon.ico
