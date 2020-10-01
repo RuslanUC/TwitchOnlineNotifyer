@@ -1,6 +1,6 @@
-#Перед компиляцией и установкой
-Необходимо скачать и установить python (3.5-3.7)
-#Компиляция:
+#РџРµСЂРµРґ РєРѕРјРїРёР»СЏС†РёРµР№ Рё СѓСЃС‚Р°РЅРѕРІРєРѕР№
+РќРµРѕР±С…РѕРґРёРјРѕ СЃРєР°С‡Р°С‚СЊ Рё СѓСЃС‚Р°РЅРѕРІРёС‚СЊ python (3.5-3.7)
+#РљРѕРјРїРёР»СЏС†РёСЏ:
 ```
 git clone https://github.com/RuslanUC/TwitchOnlineNotifyer
 cd TwitchOnlineNotifyer
@@ -8,17 +8,17 @@ pip install requests plyer
 make config
 make
 ```
-После компиляции готовая программа будет в папке dist, и что-бы она работала в одной папке с ней должен быть файл icon.ico
-#Получение данных для конфигурации
-Получить Client-ID можно тут: https://dev.twitch.tv/console/extensions/create
-А ID стримера можно получить, выполнив curl запрос:
+РџРѕСЃР»Рµ РєРѕРјРїРёР»СЏС†РёРё РіРѕС‚РѕРІР°СЏ РїСЂРѕРіСЂР°РјРјР° Р±СѓРґРµС‚ РІ РїР°РїРєРµ dist, Рё С‡С‚Рѕ-Р±С‹ РѕРЅР° СЂР°Р±РѕС‚Р°Р»Р° РІ РѕРґРЅРѕР№ РїР°РїРєРµ СЃ РЅРµР№ РґРѕР»Р¶РµРЅ Р±С‹С‚СЊ С„Р°Р№Р» icon.ico
+#РџРѕР»СѓС‡РµРЅРёРµ РґР°РЅРЅС‹С… РґР»СЏ РєРѕРЅС„РёРіСѓСЂР°С†РёРё
+РџРѕР»СѓС‡РёС‚СЊ Client-ID РјРѕР¶РЅРѕ С‚СѓС‚: https://dev.twitch.tv/console/extensions/create
+Рђ ID СЃС‚СЂРёРјРµСЂР° РјРѕР¶РЅРѕ РїРѕР»СѓС‡РёС‚СЊ, РІС‹РїРѕР»РЅРёРІ curl Р·Р°РїСЂРѕСЃ:
 ```
 curl -H 'Accept: application/vnd.twitchtv.v5+json' \
--H 'Client-ID: ВАШ CLIENT-ID' \
--X GET https://api.twitch.tv/kraken/users?login=ЛОГИН СТРИМЕРА
+-H 'Client-ID: Р’РђРЁ CLIENT-ID' \
+-X GET https://api.twitch.tv/kraken/users?login=Р›РћР“РРќ РЎРўР РРњР•Р Рђ
 ```
-Этот запрос можно выполнить на сайте https://reqbin.com/curl
-#Инструкция в картинках
+Р­С‚РѕС‚ Р·Р°РїСЂРѕСЃ РјРѕР¶РЅРѕ РІС‹РїРѕР»РЅРёС‚СЊ РЅР° СЃР°Р№С‚Рµ https://reqbin.com/curl
+#РРЅСЃС‚СЂСѓРєС†РёСЏ РІ РєР°СЂС‚РёРЅРєР°С…
 ![Cloning the repo](/images/01_clone.png)
 ![CD](/images/02_cd.png)
 ![Configuring](/images/03_config.png)
