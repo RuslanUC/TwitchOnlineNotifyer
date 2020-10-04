@@ -66,8 +66,6 @@ f.write("sys.exit()\n")
 f.close()
 
 c = open("compile.bat" if platform == "win32" else "compile.sh", "w")
-# pyinstaller main.py --icon=icon.ico  --hidden-import=plyer.platforms.win.notification -F --noconsole
-# pyinstaller -D -F -n main -c "main.py"
 c.write("pyinstaller -n TwitchOnlineNotifyer --noconsole ")
 if platform == "win32":
 	c.write('-F main.py --icon=icon.ico ')
