@@ -1,3 +1,5 @@
+#! /usr/bin/env python
+# -*- coding: utf-8 -*-
 import os
 import sys
 import argparse
@@ -10,6 +12,8 @@ p = open(".config")
 platform = p.readline().replace(" ", "").replace("\n", "")
 p.close()
 os.remove(".config")
+
+winver = 0
 
 if platform == 'win32':
 	try:
@@ -64,11 +68,11 @@ f.close()
 c = open("compile.bat" if platform == "win32" else "compile.sh", "w")
 # pyinstaller main.py --icon=icon.ico  --hidden-import=plyer.platforms.win.notification -F --noconsole
 # pyinstaller -D -F -n main -c "main.py"
-c.write("pyinstaller -n TwitchOnlineNotifyer -F --noconsole ")
+c.write("pyinstaller -n TwitchOnlineNotifyer --noconsole ")
 if platform == "win32":
-	c.write('main.py --icon=icon.ico ')
+	c.write('-F main.py --icon=icon.ico ')
 	if winver == 10:
 		c.write("--hidden-import=plyer.platforms.win.notification")
 else:
-	c.write('-D -c "main.py"')
+	c.write('-D -F -c "main.py"')
 c.close()
