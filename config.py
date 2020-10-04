@@ -1,16 +1,21 @@
+import os
 import sys
 import argparse
-
-if sys.platform != "win32":
-	exit("Данная программа работает только на Windows!")
 
 cid = input("Client ID: ")
 sid = input("Streamer ID: ")
 sn = input("Streamer Nickname: ")
-try:
-	winver = int(input("Windows version: "))
-except:
-	winver = 7
+
+p = open(".config")
+platform = p.readline().replace(" ", "").replace("\n", "")
+p.close()
+os.remove(".config")
+
+if platform == 'win32':
+	try:
+		winver = int(input("Windows version: "))
+	except:
+		winver = 7
 
 f = open("main.py", "w", encoding="utf-8")
 f.write("import sys\n")
@@ -19,7 +24,10 @@ f.write("import time\n")
 f.write("import ctypes\n")
 f.write("import requests\n")
 f.write("import platform\n")
-f.write("from plyer import notification\n")
+if platform == "linux":
+	f.write("from gi.repository import Notify")
+if winver == 10:
+	f.write("from plyer import notification\n")
 f.write("\n")
 f.write("client_id = '"+cid+"'\n")
 f.write("streamer_id = '"+sid+"'\n")
@@ -34,17 +42,33 @@ f.write("	response = requests.get('https://api.twitch.tv/kraken/streams/' + stre
 f.write("	js = json.loads(response.text)\n")
 f.write("	status = js['stream']\n")
 f.write("	if status != None:\n")
-if winver == 10:
-	f.write("		notification.notify(\n")
-	f.write("			title=streamer_nickname + ' онлайн!',\n")
-	f.write("			message=streamer_nickname + ' запустил стрим!',\n")
-	f.write("			app_name='TwitchOnline',\n")
-	f.write("			app_icon='icon.ico'\n")
-	f.write("		)\n")
+if platform == "win32":
+	if winver == 10:
+		f.write("		notification.notify(\n")
+		f.write("			title=streamer_nickname + ' онлайн!',\n")
+		f.write("			message=streamer_nickname + ' запустил стрим!',\n")
+		f.write("			app_name='TwitchOnline',\n")
+		f.write("			app_icon='icon.ico'\n")
+		f.write("		)\n")
+	else:
+		f.write("		ctypes.windll.user32.MessageBoxW(0, streamer_nickname + ' запустил стрим!', 'TwitchOnline', 1)\n")
 else:
-	f.write("		ctypes.windll.user32.MessageBoxW(0, streamer_nickname + ' запустил стрим!', 'TwitchOnline', 1)\n")
+	f.write("		Notify.init('TwitchOnline')\n")
+	f.write("		Notify.Notification.new(streamer_nickname + ' запустил стрим!').show()\n")
 f.write("		break\n")
 f.write("	time.sleep(3)\n")
 f.write("time.sleep(30)\n")
 f.write("sys.exit()\n")
 f.close()
+
+c = open("compile.bat" if platform == "win32" else "compile.sh", "w")
+# pyinstaller main.py --icon=icon.ico  --hidden-import=plyer.platforms.win.notification -F --noconsole
+# pyinstaller -D -F -n main -c "main.py"
+c.write("pyinstaller -n TwitchOnlineNotifyer -F --noconsole ")
+if platform == "win32":
+	c.write('main.py --icon=icon.ico ')
+	if winver == 10:
+		c.write("--hidden-import=plyer.platforms.win.notification")
+else:
+	c.write('-D -c "main.py"')
+c.close()
